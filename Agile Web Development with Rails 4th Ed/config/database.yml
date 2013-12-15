@@ -1,0 +1,19 @@
+settings: &settings
+  socket: /tmp/mysql.sock
+  adapter: mysql2
+  username: root
+  host: localhost
+  encoding: utf8
+  pool: 5
+
+development:
+  <<: *settings
+  database: railsagile_development
+
+test:
+  <<: *settings
+  database: railsagile_test
+
+production:
+  <<: *settings
+  database: railsagile_production
