@@ -16,7 +16,6 @@ Feature: Nightly Reports
 запустить тесты для определенных тегов:
 
 $ cucumber --tags @doofers
-
 -------------------------------------------------------------------------------
 Для каждого сценария (Scenario) создается каждый раз новый мир (World), который
 удаляется по окончании сценария (Scenario).
@@ -51,3 +50,44 @@ end
 World(DelayedJobSupport)
 
 $ cucumber features/background_jobs.feature FAIL_FAST=1
+-------------------------------------------------------------------------------
+Вызов по тегам:
+
+$ cucumber --tags @focus
+$ cucumber --tags @focus, @email                                          (или)
+$ cucumber --tags @fast --tags @focus,@email                      ("и" и "или")
+$ cucumber --tags ~@slow --tags @focus,@email                       (~ -> "не")
+
+Вызов по строкам:
+
+$ cucumber features/something.feature --line 45
+$ cucumber features/something.feature:45
+$ cucumber features/something.feature:45:89:107
+
+Вызов по именам:
+
+$ cucumber --name logout
+-------------------------------------------------------------------------------
+Меняем вывод:
+
+$ cucumber --format progress
+#=> ..U--..F..
+• . means passing.
+• U means undefined.
+• - means skipped (or a Scenario Outline step).
+• F means failing.
+
+$ cucumber -f pretty -f html --out cukes.html -f rerun --out rerun.txt
+-------------------------------------------------------------------------------
+Организация файлов:
+
+features
+  ├── billing
+  │   └── credit_card.feature
+  ├── scoring
+  │   ├── multi_player.feature
+  │   └── single_player.feature
+  └── step_definitions
+      ├── billing_steps.rb
+      └── scoring_steps.rb
+-------------------------------------------------------------------------------
