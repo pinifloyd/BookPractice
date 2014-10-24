@@ -11,3 +11,11 @@ When /^I visit the page for the User$/ do
   expect(User.count).to eq(1)
   visit(user_path(User.first))
 end
+
+Given /^a User has posted the following messages:$/ do |messages|
+  user = FactoryGirl.create(:user)
+  messages_attributes = messages.hashes.map do |message_attrs|
+    message_attrs.merge({ user: user })
+  end
+  Message.create!(messages_attributes)
+end
