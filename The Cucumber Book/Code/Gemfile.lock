@@ -86,7 +86,9 @@ DEPENDENCIES
   capybara
   cucumber
   database_cleaner
+  json
   launchy
+  rack-test
   rspec
   service_manager
   sinatra
