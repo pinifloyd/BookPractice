@@ -15,3 +15,4 @@
 ## Tests ##
 
 * The Cucumber Book (en: 2012)
+* The Rspec Book (en: 2011)
