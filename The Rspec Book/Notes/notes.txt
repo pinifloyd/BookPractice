@@ -1,0 +1,11 @@
+Можно использовать let(:name) { &block } если мы просто создаем объект, затем
+вызываем name. Выполняется перед каждым it "name" { &block }:
+
+describe "something" do
+  let(:order) { Order.new }
+
+  it "something" do
+    expect(order).to eq(order)
+  end
+end
+-------------------------------------------------------------------------------
