@@ -6,4 +6,4 @@ Feature: code-breaker starts game
     Given I am not yet playing
     When I start a new game
     Then I should see "Welcome to Codebreaker!"
-    And I should see "Enter guess:" expected ["Welcome to Codebreaker!"] to include "Enter guess:"
+    And I should see "Enter guess:"
