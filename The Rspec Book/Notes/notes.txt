@@ -19,3 +19,140 @@ Title: заголовок, что за фича.
 Narrative: повествование, рассказ о чем история. Описание, профит и тд.
 Criteria: шаги.
 -------------------------------------------------------------------------------
+describe "an empty array" do
+  it "should be empty" do
+    pending("bug report 18976") do
+      [].should be_empty
+    end
+  end
+end
+
+Когда RSpec встречает блок, он его открывает и выполняет. Если блок фэйлится
+или вызывает ошибку, тогда RSpec ведет себя как с любым другим pending.
+-------------------------------------------------------------------------------
+Группировка по начальному состоянию (initial state) использую before() hook.
+
+before(:all)  - не пересоздает контекст, запускается один раз в контексте и
+                хранит состояние.
+before(:each) - пересоздает контекст, запускается перед каждым проходом не
+                храня состояние.
+
+after(:all), after(:each)
+
+describe Stack do
+  context "when empty" do
+    before(:each) do
+      @stack = Stack.new
+    end
+  end
+end
+
+RSpec предоставляет around() hook для поддержки APIs, которые требуют блок.
+Найболее часто используется при работе с транзакциями БД.
+
+around do |example|
+  DB.transaction { example.run }
+end
+
+around do |example|
+  DB.transaction &example
+end
+-------------------------------------------------------------------------------
+describe Thing do
+  def create_thing(options)
+    thing = Thing.new
+    thing.set_status(options[:status])
+    thing
+  end
+
+  it "should do something when ok" do
+    thing = create_thing(status: 'ok')
+    thing.do_fancy_stuff(1, true, move: 'left', obstacles: nil)
+    ...
+  end
+end
+
+describe Thing do
+  def given_thing_with(options)
+    yield Thing.new do |thing|
+      thing.set_status(options[:status])
+    end
+  end
+
+  it "should do something when ok" do
+    given_thing_with(status: 'ok') do |thing|
+      thing.do_fancy_stuff(1, true, move: 'left', obstacles: nil)
+      ...
+    end
+  end
+end
+-------------------------------------------------------------------------------
+module UserExampleHelpers
+  def create_valid_user
+    User.new(email: 'email@example.com', password: 'shhhhh')
+  end
+
+  def create_invalid_user
+    User.new(password: 'shhhhh')
+  end
+end
+
+describe User do
+  include UserExampleHelpers
+
+  it "does something when it is valid" do
+    user = create_valid_user
+    # do stuff
+  end
+end
+
+#
+# Для того чтобы включить везде этот хэлпер
+#
+RSpec.configure do |config|
+  config.include(UserExampleHelpers)
+end
+-------------------------------------------------------------------------------
+Общие примеры (тесты) объявляют так с помощью shared_examples_for():
+
+shared_examples_for "any pizza" do
+  it "tastes really good" do
+    @pizza.should taste_really_good
+  end
+end
+
+Когда объявили общий пример (тест) его можно использовать с помощью
+it_behaves_like():
+
+describe "New York style thin crust pizza" do
+  before(:each) do
+    @pizza = Pizza.new(region: 'New York', style: 'thin crust')
+  end
+
+  it_behaves_like "any pizza"
+
+  it "has a really great sauce" do
+    @pizza.should have_a_really_great_sauce
+  end
+end
+-------------------------------------------------------------------------------
+If we declare before and after blocks in both the inner and outer groups, they
+will be run as follows:
+
+  1. Outer before
+  2. Inner before
+  3. Example
+  4. Inner after
+  5. Outer after
+
+To demonstrate this, copy this into a Ruby file:
+
+describe "outer" do
+  before(:each) { puts "first" }
+  describe "inner" do
+    before(:each) { puts "second" }
+    it { puts "third"}
+    after(:each) { puts "fourth" }
+  end
+  after(:each) { puts "fifth" }
+end
