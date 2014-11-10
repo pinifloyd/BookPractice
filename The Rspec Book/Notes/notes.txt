@@ -190,3 +190,10 @@ expect(user).to be_in_role("admin")
 
 Hash.should have_key(:foo)
 -------------------------------------------------------------------------------
+RSpec::Mocks (Stubs, fakes, etc.)
+
+Возвращают один и тот же объект класса RSpec::Mocks::Mock :
+double_thingamajig = double('thing-a-ma-jig')
+stub_thingamajig   = stub('thing-a-ma-jig')
+mock_thingamajig   = mock('thing-a-ma-jig')
+-------------------------------------------------------------------------------
