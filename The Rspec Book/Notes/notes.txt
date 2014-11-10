@@ -156,3 +156,37 @@ describe "outer" do
   end
   after(:each) { puts "fifth" }
 end
+-------------------------------------------------------------------------------
+Ловим ошибки:
+
+raise_error(ErrorClass, //(Regexp) || "string message")
+
+expect {
+  account.withdraw 75, :dollars
+}.to raise_error(
+  "attempted to withdraw 75 dollars from an account with 50 dollars"
+)
+
+expect {
+  account.withdraw 75, :dollars
+}.to raise_error(InsufficientFundsError)
+
+expect {
+  @mock.rspec_verify
+}.to raise_error(MockExpectationError)
+-------------------------------------------------------------------------------
+Проверки на одновременную регистрацию/снятие/итд:
+
+course = Course.new(:seats => 20)
+20.times { course.register Student.new }
+lambda {
+  course.register Student.new
+}.should throw_symbol(:course_full)
+-------------------------------------------------------------------------------
+expect(array).to be_empty
+expect(user).to be_in_role("admin")
+
+Если RSpec видит предикат "be_", он его замещает на "?".
+
+Hash.should have_key(:foo)
+-------------------------------------------------------------------------------
