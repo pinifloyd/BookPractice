@@ -196,4 +196,17 @@ RSpec::Mocks (Stubs, fakes, etc.)
 double_thingamajig = double('thing-a-ma-jig')
 stub_thingamajig   = stub('thing-a-ma-jig')
 mock_thingamajig   = mock('thing-a-ma-jig')
+
+
+customer = double('customer', :name => 'Bryan')
+
+то же что и:
+
+customer = double('customer')
+customer.stub(:name).and_return('Bryan')
+
+Стабим цепочкой:
+
+article = double()
+Article.stub_chain(:recent, :published, :authored_by).and_return(article)
 -------------------------------------------------------------------------------
