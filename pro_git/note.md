@@ -1,3 +1,21 @@
+## Contents
+
+* [Config](https://github.com/pinifloyd/BookPractice/blob/master/pro_git/note.md#config)
+* [Commit](https://github.com/pinifloyd/BookPractice/blob/master/pro_git/note.md#commit)
+* [Log](https://github.com/pinifloyd/BookPractice/blob/master/pro_git/note.md#log)
+* [Remote Repos](https://github.com/pinifloyd/BookPractice/blob/master/pro_git/note.md#remote-repos)
+* [Tag](https://github.com/pinifloyd/BookPractice/blob/master/pro_git/note.md#tag)
+* [Branch](https://github.com/pinifloyd/BookPractice/blob/master/pro_git/note.md#branch)
+* [Release](https://github.com/pinifloyd/BookPractice/blob/master/pro_git/note.md#release)
+* [Changelog](https://github.com/pinifloyd/BookPractice/blob/master/pro_git/note.md#changelog)
+* [Stash](https://github.com/pinifloyd/BookPractice/blob/master/pro_git/note.md#stash)
+* [Remove File From History](https://github.com/pinifloyd/BookPractice/blob/master/pro_git/note.md#remove-file-from-history)
+* [Blame](https://github.com/pinifloyd/BookPractice/blob/master/pro_git/note.md#blame)
+* [Bisect](https://github.com/pinifloyd/BookPractice/blob/master/pro_git/note.md#bisect)
+* [Submodule](https://github.com/pinifloyd/BookPractice/blob/master/pro_git/note.md#submodule)
+* [Statistic](https://github.com/pinifloyd/BookPractice/blob/master/pro_git/note.md#statistic)
+* [Find Big Files](https://github.com/pinifloyd/BookPractice/blob/master/pro_git/note.md#find-big-files)
+
 ## Config
 
 Уставновить свой редактор можно с помощью комманды:
